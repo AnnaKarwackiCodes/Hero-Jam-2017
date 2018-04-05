@@ -26,70 +26,72 @@ public class TA : MonoBehaviour {
     {
         //KeyDebug();
         //checking for the two key combos
-        if ((Input.GetKey(KeyCode.RightArrow) && (Input.GetKey(KeyCode.UpArrow))) && collisionJoy != 4)
-        {
-            //animator.enabled = true;
-            lastJoy = 4;
-            animator.SetInteger("Direction", 2);
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-            transform.Translate(Vector2.down * speed * Time.deltaTime);
-            isMoving = true;
-        }
+		/*
+		if ((Input.GetKey (KeyCode.RightArrow) && (Input.GetKey (KeyCode.UpArrow))) && collisionJoy != 4) {
+			//animator.enabled = true;
+			lastJoy = 4;
+			animator.SetInteger ("Direction", 2);
+			transform.Translate (Vector2.right * speed * Time.deltaTime);
+			transform.Translate (Vector2.down * speed * Time.deltaTime);
+			isMoving = true;
+		}
+		*/
         //checking for the single key inputs
-        if ((Input.GetAxis("Left Joy Right") == 1 || Input.GetKey(KeyCode.RightArrow)) && collisionJoy != 0)
+        if ((Input.GetAxis ("Left Joy Right") == 1 || Input.GetKey (KeyCode.RightArrow)) && collisionJoy != 0) {
+			//animator.enabled = true;
+			lastJoy = 0;
+			animator.SetInteger ("Direction", 2);
+			transform.Translate (Vector2.right * speed * Time.deltaTime);
+			isMoving = true;
+		} else if ((Input.GetAxis ("Left Joy Right") == -1 || Input.GetKey (KeyCode.LeftArrow)) && collisionJoy != 1) {
+			//animator.enabled = true;
+			lastJoy = 1;
+			animator.SetInteger ("Direction", 3);
+			transform.Translate (Vector2.left * speed * Time.deltaTime);
+			isMoving = true;
+		} else if ((Input.GetAxis ("Left Joy Up") == 1 || Input.GetKey (KeyCode.DownArrow)) && collisionJoy != 2) {
+			//animator.enabled = true;
+			lastJoy = 2;
+			animator.SetInteger ("Direction", 1);
+			transform.Translate (Vector2.down * speed * Time.deltaTime);
+			isMoving = true;
+		} else if ((Input.GetAxis ("Left Joy Up") == -1 || Input.GetKey (KeyCode.UpArrow)) && collisionJoy != 3) {
+			//animator.enabled = true;
+			lastJoy = 3;
+			animator.SetInteger ("Direction", 0);
+			transform.Translate (Vector2.up * speed * Time.deltaTime);
+			isMoving = true;
+		} else {
+			isMoving = false;
+		}
+        if((Input.GetAxis("Left Joy Right") == 0 && Input.GetAxis("Left Joy Up") == 0))
         {
-            //animator.enabled = true;
-            lastJoy = 0;
-            animator.SetInteger("Direction", 2);
-            transform.Translate(Vector2.right * speed * Time.deltaTime);
-            isMoving = true;
-        }
-        if((Input.GetAxis("Left Joy Right") == -1 || Input.GetKey(KeyCode.LeftArrow)) && collisionJoy != 1)
-        {
-            //animator.enabled = true;
-            lastJoy = 1;
-            animator.SetInteger("Direction", 3);
-            transform.Translate(Vector2.left * speed * Time.deltaTime);
-            isMoving = true;
-        }
-        if ((Input.GetAxis("Left Joy Up") == 1 || Input.GetKey(KeyCode.DownArrow)) && collisionJoy != 2)
-        {
-            //animator.enabled = true;
-            lastJoy = 2;
-            animator.SetInteger("Direction", 1);
-            transform.Translate(Vector2.down * speed * Time.deltaTime);
-            isMoving = true;
-        }
-        if ((Input.GetAxis("Left Joy Up") == -1 || Input.GetKey(KeyCode.UpArrow)) && collisionJoy != 3)
-        {
-            //animator.enabled = true;
-            lastJoy = 3;
-            animator.SetInteger("Direction", 0);
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
-            isMoving = true;
-        }
-        if((Input.GetAxis("Left Joy Right") == 0 && Input.GetAxis("Left Joy Up") == 0) && (!Input.GetKey(KeyCode.UpArrow)&& !Input.GetKey(KeyCode.DownArrow)&& !Input.GetKey(KeyCode.LeftArrow)&& !Input.GetKey(KeyCode.RightArrow)))
-        {
+			Debug.Log ("fdsdfsd");
             isMoving = false;
         }
         if (!isMoving)
         {
             //animator.enabled = false;
+			Debug.Log("not moving");
             
             if (animator.GetInteger("Direction") == 0)
             {
+				Debug.Log ("1");
                 animator.SetInteger("Direction", 4);
             }
             else if (animator.GetInteger("Direction") == 1)
             {
+				Debug.Log ("2");
                 animator.SetInteger("Direction", 5);
             }
             else if (animator.GetInteger("Direction") == 2)
             {
+				Debug.Log ("3");
                 animator.SetInteger("Direction", 6);
             }
             else if (animator.GetInteger("Direction") == 3)
             {
+				Debug.Log ("4");
                 animator.SetInteger("Direction", 7);
             }
 
