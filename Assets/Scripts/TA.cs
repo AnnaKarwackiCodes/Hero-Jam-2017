@@ -24,8 +24,19 @@ public class TA : MonoBehaviour {
 
     void Movement()
     {
-        Debug.Log(animator.GetInteger("Direction"));
-        if((Input.GetAxis("Left Joy Right") == 1 || Input.GetKey(KeyCode.RightArrow)) && collisionJoy != 0 )//&&transform.position.x < 8.5)
+        //KeyDebug();
+        //checking for the two key combos
+        if ((Input.GetKey(KeyCode.RightArrow) && (Input.GetKey(KeyCode.UpArrow))) && collisionJoy != 4)
+        {
+            //animator.enabled = true;
+            lastJoy = 4;
+            animator.SetInteger("Direction", 2);
+            transform.Translate(Vector2.right * speed * Time.deltaTime);
+            transform.Translate(Vector2.down * speed * Time.deltaTime);
+            isMoving = true;
+        }
+        //checking for the single key inputs
+        if ((Input.GetAxis("Left Joy Right") == 1 || Input.GetKey(KeyCode.RightArrow)) && collisionJoy != 0)
         {
             //animator.enabled = true;
             lastJoy = 0;
@@ -33,7 +44,7 @@ public class TA : MonoBehaviour {
             transform.Translate(Vector2.right * speed * Time.deltaTime);
             isMoving = true;
         }
-        if((Input.GetAxis("Left Joy Right") == -1 || Input.GetKey(KeyCode.LeftArrow)) && collisionJoy != 1 )//&& transform.position.x > -9)
+        if((Input.GetAxis("Left Joy Right") == -1 || Input.GetKey(KeyCode.LeftArrow)) && collisionJoy != 1)
         {
             //animator.enabled = true;
             lastJoy = 1;
@@ -41,7 +52,7 @@ public class TA : MonoBehaviour {
             transform.Translate(Vector2.left * speed * Time.deltaTime);
             isMoving = true;
         }
-        if ((Input.GetAxis("Left Joy Up") == 1 || Input.GetKey(KeyCode.DownArrow)) && collisionJoy != 2 )//&& transform.position.y > -.5)
+        if ((Input.GetAxis("Left Joy Up") == 1 || Input.GetKey(KeyCode.DownArrow)) && collisionJoy != 2)
         {
             //animator.enabled = true;
             lastJoy = 2;
@@ -49,7 +60,7 @@ public class TA : MonoBehaviour {
             transform.Translate(Vector2.down * speed * Time.deltaTime);
             isMoving = true;
         }
-        if ((Input.GetAxis("Left Joy Up") == -1 || Input.GetKey(KeyCode.UpArrow)) && collisionJoy != 3 )//&& transform.position.y < 7)
+        if ((Input.GetAxis("Left Joy Up") == -1 || Input.GetKey(KeyCode.UpArrow)) && collisionJoy != 3)
         {
             //animator.enabled = true;
             lastJoy = 3;
@@ -86,12 +97,38 @@ public class TA : MonoBehaviour {
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        //Debug.Log("collisde");
-        //collisionJoy = lastJoy;
+        //Debug.Log("collide");
+        collisionJoy = lastJoy;
     }
     public void OnTriggerExit2D(Collider2D collision)
     {
-        //collisionJoy = -1;
+        collisionJoy = -1;
     }
-
+    public void KeyDebug()
+    {
+        Debug.Log("THIS ROUND");
+        
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            Debug.Log("up");
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            Debug.Log("down");
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            Debug.Log("right");
+        }
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            Debug.Log("left");
+        }
+        
+        if (Input.GetKey(KeyCode.UpArrow)&& Input.GetKey(KeyCode.RightArrow))
+        {
+            Debug.Log("up and right");
+        }
+        
+    }
 }
